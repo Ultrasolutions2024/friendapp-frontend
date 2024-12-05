@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Animated, Image } from 'react-native';
 import { icons } from '../constants';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 
 
 const QuickLinks = ({ modalVisible, toggleModal }) => {
-  const slideAnim = useRef(new Animated.Value(300)).current; 
+  const slideAnim = useRef(new Animated.Value(300)).current;
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
@@ -22,17 +22,18 @@ const QuickLinks = ({ modalVisible, toggleModal }) => {
         useNativeDriver: true,
       }),
     ]).start();
-  }, [modalVisible]);
+  }, [modalVisible, scaleAnim, slideAnim]);
 
   const options = [
-    { label: 'Warnings', icon: icons.warning, link: 'Warnings' },
-    { label: 'Wallet', icon: icons.wallet, link: 'Wallet' },
-    { label: 'Transaction', icon: icons.transaction, link: 'Transaction' },
-    { label: 'Edit Profile', icon: icons.account, link: 'EditProfile' },
-    { label: 'Feedback', icon: icons.feedback, link: 'Feedback' },
-    { label: 'Terms and Conditions', icon: icons.terms, link: 'TermsAndConditions' },
-    { label: 'Settings', icon: icons.settings, link: 'Settings' },
-    { label: 'Spin a Game', icon: icons.lottery, link: 'SpinAGame' },
+    {label: 'Warnings', icon: icons.warning, link: 'Warnings'},
+    {label: 'Transaction', icon: icons.transaction, link: 'Transactions'},
+    {label: 'Feedback', icon: icons.feedback, link: 'Feedback'},
+    {
+      label: 'Terms and Conditions',
+      icon: icons.terms,
+      link: 'TermsAndConditions',
+    },
+    {label: 'Settings', icon: icons.settings, link: 'Settings'},
   ];
 
   return (
@@ -42,12 +43,12 @@ const QuickLinks = ({ modalVisible, toggleModal }) => {
       visible={modalVisible}
       onRequestClose={toggleModal}
     >
-      <TouchableWithoutFeedback onPress={toggleModal}> 
+      <TouchableWithoutFeedback onPress={toggleModal}>
         <View style={styles.modalBackground}>
           <Animated.View style={[styles.modalContainer, {
             transform: [
               { translateX: slideAnim }, // Animate from right to left
-              { scale: scaleAnim }
+              { scale: scaleAnim },
             ],
           }]}>
             {options.map((option, index) => (

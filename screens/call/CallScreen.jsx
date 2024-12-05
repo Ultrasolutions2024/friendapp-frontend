@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,89 +7,89 @@ import {
   ScrollView,
   ImageBackground,
   TouchableOpacity,
-} from "react-native";
-import { icons, images } from "../../constants";
+} from 'react-native';
+import { icons, images } from '../../constants';
 
 const CallScreen = () => {
-  const [selectedFilter, setSelectedFilter] = useState("all"); // State to manage the selected filter
+  const [selectedFilter, setSelectedFilter] = useState('all'); // State to manage the selected filter
 
   // Sample data for call history with call duration and caller information
   const callHistoryData = [
     {
       id: 1,
-      title: "John Doe",
+      title: 'John Doe',
       imageUrl: images.profile,
-      duration: "12 min",
-      callType: "missed",
+      duration: '12 min',
+      callType: 'missed',
     },
     {
       id: 2,
-      title: "Emma Watson",
+      title: 'Emma Watson',
       imageUrl: images.profile,
-      duration: "5 min",
-      callType: "outgoing",
+      duration: '5 min',
+      callType: 'outgoing',
     },
     {
       id: 3,
-      title: "Michael Smith",
+      title: 'Michael Smith',
       imageUrl: images.profile,
-      duration: "7 min",
-      callType: "received",
+      duration: '7 min',
+      callType: 'received',
     },
     {
       id: 4,
-      title: "Sarah Connor",
+      title: 'Sarah Connor',
       imageUrl: images.profile,
-      duration: "8 min",
-      callType: "received",
+      duration: '8 min',
+      callType: 'received',
     },
     {
       id: 5,
-      title: "Tom Hardy",
+      title: 'Tom Hardy',
       imageUrl: images.profile,
-      duration: "15 min",
-      callType: "outgoing",
+      duration: '15 min',
+      callType: 'outgoing',
     },
     {
       id: 6,
-      title: "Jessica Jones",
+      title: 'Jessica Jones',
       imageUrl: images.profile,
-      duration: "3 min",
-      callType: "missed",
+      duration: '3 min',
+      callType: 'missed',
     },
     {
       id: 7,
-      title: "Bruce Wayne",
+      title: 'Bruce Wayne',
       imageUrl: images.profile,
-      duration: "9 min",
-      callType: "received",
+      duration: '9 min',
+      callType: 'received',
     },
     {
       id: 8,
-      title: "Clark Kent",
+      title: 'Clark Kent',
       imageUrl: images.profile,
-      duration: "11 min",
-      callType: "outgoing",
+      duration: '11 min',
+      callType: 'outgoing',
     },
     {
       id: 9,
-      title: "Peter Parker",
+      title: 'Peter Parker',
       imageUrl: images.profile,
-      duration: "6 min",
-      callType: "received",
+      duration: '6 min',
+      callType: 'received',
     },
     {
       id: 10,
-      title: "Wade Wilson",
+      title: 'Wade Wilson',
       imageUrl: images.profile,
-      duration: "4 min",
-      callType: "missed",
+      duration: '4 min',
+      callType: 'missed',
     },
   ];
 
   // Filter the call history based on the selected filter
   const filteredCallHistory = callHistoryData.filter((card) => {
-    return selectedFilter === "all" || card.callType === selectedFilter;
+    return selectedFilter === 'all' || card.callType === selectedFilter;
   });
 
   return (
@@ -99,14 +99,14 @@ const CallScreen = () => {
         <TouchableOpacity
           style={[
             styles.genderButton,
-            selectedFilter === "all" && styles.activeGenderButton,
+            selectedFilter === 'all' && styles.activeGenderButton,
           ]}
-          onPress={() => setSelectedFilter("all")}
+          onPress={() => setSelectedFilter('all')}
         >
           <Text
             style={[
               styles.genderButtonText,
-              selectedFilter === "all" && styles.activeGenderButtonText,
+              selectedFilter === 'all' && styles.activeGenderButtonText,
             ]}
           >
             All
@@ -115,14 +115,14 @@ const CallScreen = () => {
         <TouchableOpacity
           style={[
             styles.genderButton,
-            selectedFilter === "missed" && styles.activeGenderButton,
+            selectedFilter === 'missed' && styles.activeGenderButton,
           ]}
-          onPress={() => setSelectedFilter("missed")}
+          onPress={() => setSelectedFilter('missed')}
         >
           <Text
             style={[
               styles.genderButtonText,
-              selectedFilter === "missed" && styles.activeGenderButtonText,
+              selectedFilter === 'missed' && styles.activeGenderButtonText,
             ]}
           >
             Missed
@@ -131,14 +131,14 @@ const CallScreen = () => {
         <TouchableOpacity
           style={[
             styles.genderButton,
-            selectedFilter === "outgoing" && styles.activeGenderButton,
+            selectedFilter === 'outgoing' && styles.activeGenderButton,
           ]}
-          onPress={() => setSelectedFilter("outgoing")}
+          onPress={() => setSelectedFilter('outgoing')}
         >
           <Text
             style={[
               styles.genderButtonText,
-              selectedFilter === "outgoing" && styles.activeGenderButtonText,
+              selectedFilter === 'outgoing' && styles.activeGenderButtonText,
             ]}
           >
             Outgoing
@@ -147,14 +147,14 @@ const CallScreen = () => {
         <TouchableOpacity
           style={[
             styles.genderButton,
-            selectedFilter === "received" && styles.activeGenderButton,
+            selectedFilter === 'received' && styles.activeGenderButton,
           ]}
-          onPress={() => setSelectedFilter("received")}
+          onPress={() => setSelectedFilter('received')}
         >
           <Text
             style={[
               styles.genderButtonText,
-              selectedFilter === "received" && styles.activeGenderButtonText,
+              selectedFilter === 'received' && styles.activeGenderButtonText,
             ]}
           >
             Received
@@ -176,13 +176,13 @@ const CallScreen = () => {
             </View>
             <TouchableOpacity style={styles.callButtonC}>
               <View style={styles.callInfoContainer}>
-                {card.callType === "missed" && (
+                {card.callType === 'missed' && (
                   <Image source={icons.missed} style={styles.callIconm} />
                 )}
-                {card.callType === "outgoing" && (
+                {card.callType === 'outgoing' && (
                   <Image source={icons.outgoing} style={styles.callIcono} />
                 )}
-                {card.callType === "received" && (
+                {card.callType === 'received' && (
                   <Image source={icons.incomming} style={styles.callIconi} />
                 )}
               </View>
@@ -200,14 +200,14 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   genderTabs: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 20,
-    position: "fixed",
+    position: 'fixed',
     top: 10,
   },
   genderButton: {
@@ -215,44 +215,44 @@ const styles = StyleSheet.create({
     paddingVertical: 10, // Equal vertical padding for size consistency
     marginHorizontal: 5, // Margin to create space between buttons
     borderRadius: 5,
-    backgroundColor: "#FF3B96",
-    alignItems: "center",
+    backgroundColor: '#FF3B96',
+    alignItems: 'center',
   },
   activeGenderButton: {
-    backgroundColor: "#d70862", // Color for active buttons
+    backgroundColor: '#d70862', // Color for active buttons
   },
   genderButtonText: {
     fontSize: 16,
-    fontFamily: "Poppins-Regular",
-    color: "#fff",
+    fontFamily: 'Poppins-Regular',
+    color: '#fff',
   },
   activeGenderButtonText: {
-    color: "#fff", // Text color for active buttons
+    color: '#fff', // Text color for active buttons
   },
   verticalCard: {
-    backgroundColor: "#F4F4FB",
+    backgroundColor: '#F4F4FB',
     borderRadius: 20,
     marginTop: 5,
     marginBottom: 5,
     marginHorizontal: 10,
     borderWidth: 1,
-    borderColor: "#f5e3f6",
-    flexDirection: "row",
+    borderColor: '#f5e3f6',
+    flexDirection: 'row',
     padding: 24,
-    alignItems: "center",
+    alignItems: 'center',
     elevation: 20,
-    shadowColor: "#FF3B96",
+    shadowColor: '#FF3B96',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 11,
   },
   heading: {
     fontSize: 28,
-    textAlign: "center",
+    textAlign: 'center',
     marginVertical: 10,
-    fontFamily: "Poppins-Bold",
-    color: "#FF3B96",
-    position: "fixed",
+    fontFamily: 'Poppins-Bold',
+    color: '#FF3B96',
+    position: 'fixed',
     top: 15,
   },
   verticalImage: {
@@ -265,30 +265,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   userInfo: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   cardTitle: {
     fontSize: 16,
-    fontFamily: "Poppins-Bold",
-    color: "#333",
+    fontFamily: 'Poppins-Bold',
+    color: '#333',
   },
   onlineIndicator: {
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "green",
+    backgroundColor: 'green',
     marginLeft: 8,
   },
   callInfoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 4,
   },
   callDuration: {
     fontSize: 14,
-    fontFamily: "Poppins-Regular",
-    color: "#999",
+    fontFamily: 'Poppins-Regular',
+    color: '#999',
     marginRight: 8,
   },
   callIconm: {
@@ -307,12 +307,12 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   callButtonC: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     width: 50,
     height: 50,
     padding: 10,
     borderRadius: 50,
-    shadowColor: "#BB9CEF",
+    shadowColor: '#BB9CEF',
     shadowOffset: {
       width: 0,
       height: 12,

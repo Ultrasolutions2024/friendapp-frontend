@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   View,
   Text,
@@ -13,19 +14,26 @@ import {
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {images} from '../../constants';
 import {Dimensions} from 'react-native';
-
+import {useDispatch} from 'react-redux';
+import {Otpsend, OtpVerify} from '../../store/user/userSlice';
 const {height, width} = Dimensions.get('window');
 
 const LoginScreen = ({navigation}) => {
-  const [mobile, setMobile] = useState('');
+  const inputs = useRef([]);
+  const [phoneNumber, setphoneNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isAgreed, setIsAgreed] = useState(false);
-
-  const handleSendOtp = () => {
-    if (mobile.length === 10) {
-      setIsOtpSent(true);
-      Alert.alert('OTP Sent', 'An OTP has been sent to your mobile number.');
+  const dispatch = useDispatch();
+  const handleSendOtp = async () => {
+    if (phoneNumber.length === 10) {
+      try {
+        await AsyncStorage.setItem('phoneNumber', phoneNumber);
+        setIsOtpSent(true);
+        dispatch(Otpsend({phoneNumber}));
+      } catch (error) {
+        console.error('Error saving phone number:', error);
+      }
     } else {
       Alert.alert(
         'Invalid Mobile Number',
@@ -34,14 +42,43 @@ const LoginScreen = ({navigation}) => {
     }
   };
 
-  const handleVerifyOtp = () => {
-    if (otp === '1234') {
-      Alert.alert('Success', 'OTP Verified!');
-      navigation.navigate('UserDetails');
+const handleVerifyOtp = async () => {
+  try {
+    const phoneNumbers = await AsyncStorage.getItem('phoneNumber');
+    const formattedPhoneNumber = `+91${phoneNumbers}`;
+    console.log(phoneNumber, otp);
+
+    const result = await dispatch(
+      OtpVerify({otp, phoneNumber: formattedPhoneNumber}),
+    );
+
+    if (OtpVerify.fulfilled.match(result)) {
+      const {register} = result.payload;
+
+      if (register) {
+        console.log('OTP verified successfully. You can now register.');
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'UserDetails'}],
+        });
+      } else {
+        console.log('OTP verified successfully. You can now log in.');
+        navigation.navigate('Tab');
+      }
     } else {
-      Alert.alert('Error', 'Invalid OTP. Please try again.');
+      console.log(
+        'Error',
+        'OTP verification failed. Please try again.',
+        'error',
+      );
     }
-  };
+  } catch (error) {
+    console.error('Error retrieving phone number:', error);
+    console.log('Error', 'Something went wrong. Please try again.', 'error');
+  }
+};
+
+
 
   return (
     <KeyboardAvoidingView
@@ -60,8 +97,8 @@ const LoginScreen = ({navigation}) => {
           <View style={styles.inputContainer}>
             <TextInput
               placeholder="Enter your mobile number"
-              value={mobile}
-              onChangeText={setMobile}
+              value={phoneNumber}
+              onChangeText={setphoneNumber}
               style={styles.input}
               keyboardType="phone-pad"
               maxLength={10}
@@ -71,7 +108,7 @@ const LoginScreen = ({navigation}) => {
                 isChecked={isAgreed}
                 onPress={() => setIsAgreed(!isAgreed)}
                 text="I agree to the terms and conditions"
-                textStyle={{ textDecorationLine: 'none' }}
+                textStyle={{textDecorationLine: 'none'}}
                 fillColor="#FF3B96"
                 style={styles.checkbox}
               />
@@ -98,19 +135,18 @@ const LoginScreen = ({navigation}) => {
                       const newOtp = otp.split('');
                       newOtp[index] = text;
                       setOtp(newOtp.join(''));
+
                       if (text.length === 1 && index < 3) {
-                        this[`otpInput${index + 1}`].focus();
+                        inputs.current[index + 1]?.focus();
                       }
                       if (text.length === 0 && index > 0) {
-                        this[`otpInput${index - 1}`].focus();
+                        inputs.current[index - 1]?.focus();
                       }
                     }}
                     style={styles.otpInput}
                     keyboardType="number-pad"
                     maxLength={1}
-                    ref={input => {
-                      this[`otpInput${index}`] = input;
-                    }}
+                    ref={el => (inputs.current[index] = el)}
                   />
                 ))}
             </View>
