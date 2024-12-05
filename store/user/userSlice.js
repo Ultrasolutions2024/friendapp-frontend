@@ -46,6 +46,16 @@ export const registerUser = createAsyncThunk(
         `${backend_url}/api/register_user`,
         payload,
       );
+      // Access `verifiedUser` from the response
+      const verifiedUser = response.data?.verifiedUser;
+
+      // Save `verifiedUser` in AsyncStorage
+      if (verifiedUser !== undefined) {
+        await AsyncStorage.setItem(
+          'verifiedUser',
+          JSON.stringify(verifiedUser),
+        );
+      }
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);

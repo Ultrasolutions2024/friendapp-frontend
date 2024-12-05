@@ -3,7 +3,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
-import HomeScreen from '../screens/homescreen/HomeScreen';
+import Home from '../screens/homescreen/HomeScreen';
 import CallScreen from '../screens/call/CallScreen';
 import MoneyRecharge from '../screens/money/MoneyRecharge';
 import WalletScreen from '../screens/wallet/WalletScreen';
@@ -22,7 +22,7 @@ const TabNavigation = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
