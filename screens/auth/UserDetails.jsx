@@ -29,7 +29,10 @@ const UserDetails = ({navigation}) => {
     dispatch(
       registerUser({nickname, gender, phoneNumber: formattedPhoneNumber}),
     );
-    navigation.navigate('Tab');
+   navigation.reset({
+     index: 0,
+     routes: [{name: 'Tab'}],
+   });
   };
 
   // Date Picker Handler

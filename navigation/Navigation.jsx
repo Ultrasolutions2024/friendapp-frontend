@@ -34,9 +34,15 @@ function Navigation() {
   };
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const phoneNumber = await AsyncStorage.getItem('phoneNumber');
-      if (phoneNumber) {
-        setIsLoggedIn(true);
+      try {
+        const verifiedUser = await AsyncStorage.getItem('verifiedUser');
+        if (verifiedUser === 'true') {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
       }
     };
 
@@ -47,11 +53,28 @@ function Navigation() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName={isLoggedIn ? 'Tab' : 'Welcome'}>
           {!isLoggedIn ? (
-            <Stack.Screen
-              name="Welcome"
-              component={WelcomeScreen}
-              options={{headerShown: false}}
-            />
+            <>
+              <Stack.Screen
+                name="Welcome"
+                component={WelcomeScreen}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="UserDetails"
+                component={UserDetails}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="Tab"
+                component={TabNavigation}
+                options={{headerShown: false}}
+              />
+            </>
           ) : (
             <Stack.Screen
               name="Tab"
@@ -59,16 +82,7 @@ function Navigation() {
               options={{headerShown: false}}
             />
           )}
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="UserDetails"
-            component={UserDetails}
-            options={{headerShown: false}}
-          />
+
           {/*   <Stack.Screen
             name="Tab"
             component={TabNavigation}
