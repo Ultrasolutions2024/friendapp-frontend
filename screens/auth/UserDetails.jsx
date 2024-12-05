@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Dimensions, Platform } from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Platform,
+} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { images } from '../../constants';
-
-const { width } = Dimensions.get('window');
-
-const UserDetails = ({ navigation }) => {
+import {images} from '../../constants';
+import {useDispatch} from 'react-redux';
+import {registerUser} from '../../store/user/userSlice';
+const {width} = Dimensions.get('window');
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const UserDetails = ({navigation}) => {
+  const dispatch = useDispatch();
   const [nickname, setNickname] = useState('');
   const [gender, setGender] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const handleNext = () => {
+  const handleNext = async e => {
+    const phoneNumber = await AsyncStorage.getItem('phoneNumber');
+    const formattedPhoneNumber = `+91${phoneNumber}`;
+    dispatch(
+      registerUser({nickname, gender, phoneNumber: formattedPhoneNumber}),
+    );
     navigation.navigate('Tab');
   };
 
@@ -40,39 +56,43 @@ const UserDetails = ({ navigation }) => {
       <Text style={styles.label}>Gender:</Text>
       <View style={styles.radioContainer}>
         <TouchableOpacity
-          style={[styles.radioButton, gender === 'male' && styles.selectedButton]}
-          onPress={() => setGender('male')}
-        >
+          style={[
+            styles.radioButton,
+            gender === 'male' && styles.selectedButton,
+          ]}
+          onPress={() => setGender('male')}>
           <Image source={images.male} style={styles.radioImage} />
           <Text style={styles.radioText}>Male</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.radioButton, gender === 'female' && styles.selectedButton]}
-          onPress={() => setGender('female')}
-        >
+          style={[
+            styles.radioButton,
+            gender === 'female' && styles.selectedButton,
+          ]}
+          onPress={() => setGender('female')}>
           <Image source={images.female} style={styles.radioImage} />
           <Text style={styles.radioText}>Female</Text>
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.label}>Date of Birth:</Text>
+      {/* <Text style={styles.label}>Date of Birth:</Text>
       <TouchableOpacity
         style={styles.dateInputContainer}
         onPress={() => setShowDatePicker(true)}
       >
         <Text style={styles.dateText}>{dateOfBirth || 'Select Date of Birth'}</Text>
         <Ionicons name="calendar-outline" size={24} color="#888" style={styles.dateIcon} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
-      {showDatePicker && (
+      {/* {showDatePicker && (
         <DateTimePicker
           value={new Date()}
           mode="date"
           display="default"
           onChange={handleDateChange}
         />
-      )}
+      )} */}
 
       <TouchableOpacity style={styles.button} onPress={handleNext}>
         <Text style={styles.buttonText}>Next</Text>
@@ -101,10 +121,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
   },
   input: {
-    borderBottomWidth: 1,  
-    borderBottomColor: '#FF3B96',  
+    borderBottomWidth: 1,
+    borderBottomColor: '#FF3B96',
     padding: 10,
-    borderRadius: 0, 
+    borderRadius: 0,
     marginBottom: 20,
     fontSize: 16,
     justifyContent: 'center',
@@ -118,11 +138,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 30,
-    borderRadius: 100, 
+    borderRadius: 100,
     backgroundColor: '#fcfcfc',
-    width: 150,  
+    width: 150,
     height: 150,
-    overflow: 'hidden', 
+    overflow: 'hidden',
   },
   selectedButton: {
     backgroundColor: '#e0e0e0',

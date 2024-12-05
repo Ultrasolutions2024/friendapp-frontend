@@ -71,95 +71,95 @@ export default WalletScreen;
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover", // Adjust the background image to cover the entire screen
+    resizeMode: 'cover', // Adjust the background image to cover the entire screen
   },
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 50,
   },
   heading: {
-    fontFamily: "Poppins-SemiBold",
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 38,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 5,
   },
   subHeading: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
     fontSize: 18,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 20,
   },
   inputContainer: {
-    width: "100%",
+    width: '100%',
     marginBottom: 30,
   },
   label: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 25,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 5,
   },
   input: {
     height: 50,
-    borderColor: "#FF3B96",
+    borderColor: '#FF3B96',
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 15,
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
     fontSize: 18,
-    color: "#000",
-    backgroundColor: "rgba(255, 255, 255, 0.5)", // Transparent background
+    color: '#000',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Transparent background
   },
   addButton: {
     height: 50,
-    backgroundColor: "#FF3B96",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#FF3B96',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
     marginTop: 10,
   },
   addButtonText: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 18,
-    color: "#fff",
+    color: '#fff',
   },
   historyHeading: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 24,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 10,
   },
   transactionList: {
-    width: "100%",
+    width: '100%',
     paddingBottom: 10,
   },
   transactionItem: {
-    backgroundColor: "rgba(255, 255, 255, 0.7)", // Slightly transparent background for transaction items
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Slightly transparent background for transaction items
     padding: 15,
     paddingHorizontal:90,
     borderRadius: 10,
     marginBottom: 10,
   },
   transactionText: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
     fontSize: 16,
-    color: "#000",
+    color: '#000',
   },
   viewAllButton: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
-    marginBottom:10
+    marginBottom:10,
   },
   viewAllButtonText: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 18,
-    color: "#FF3B96",
+    color: '#FF3B96',
   },
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images, icons } from '../../constants';
-import QuickLinks from '../../components/QuickLinks';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -19,39 +18,13 @@ const { width, height } = Dimensions.get('window');
 const ProfileScreen = () => {
   const navigation = useNavigation();
 
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
-
   return (
     <ImageBackground source={images.bg} style={styles.background}>
       <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-          style={styles.drawerButton}
-          onPress={toggleModal}  // Make sure this triggers modal visibility
-        >
-          <Image source={icons.menu} style={styles.menuIcon} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.arrowButton}
-          onPress={() => navigation.navigate('Tab')}
-        >
-          <Image source={icons.arrow} style={styles.menuIcon} />
-        </TouchableOpacity>
-
-        <QuickLinks
-          modalVisible={modalVisible}
-          toggleModal={toggleModal}
-        />
-
         <ImageBackground
           source={images.bg}
           style={styles.profileBackground}
-          blurRadius={10}
-        >
+          blurRadius={10}>
           <View style={styles.profileContainer}>
             <View style={styles.profilepicCard}>
               <Image source={images.profile} style={styles.profileImage} />
@@ -76,7 +49,9 @@ const ProfileScreen = () => {
         <Image source={images.profilesub} style={styles.bannerImage} />
 
         <View style={styles.listBackground}>
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('EditProfile')}>
             <View style={styles.cardContent}>
               <Image source={images.profile} style={styles.cardIcon1} />
               <Text style={styles.cardLabel}>Edit Profile</Text>
@@ -84,7 +59,9 @@ const ProfileScreen = () => {
             <Image source={icons.rightArrow2} style={styles.goIcon} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('WalletScreen')}>
             <View style={styles.cardContent}>
               <Image source={icons.wallet} style={styles.cardIcon} />
               <Text style={styles.cardLabel}>Wallet</Text>
@@ -92,7 +69,9 @@ const ProfileScreen = () => {
             <Image source={icons.rightArrow2} style={styles.goIcon} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('Spin')}>
             <View style={styles.cardContent}>
               <Image source={icons.wheel} style={styles.cardIcon3} />
               <Text style={styles.cardLabel}>Spin a Game</Text>
@@ -100,10 +79,12 @@ const ProfileScreen = () => {
             <Image source={icons.rightArrow2} style={styles.goIcon} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.card}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('Recharge')}>
             <View style={styles.cardContent}>
               <Image source={icons.rps} style={styles.cardIcon} />
-              <Text style={styles.cardLabel}>Add Money</Text>
+              <Text style={styles.cardLabel}>Add Coins</Text>
             </View>
             <Image source={icons.rightArrow2} style={styles.goIcon} />
           </TouchableOpacity>
@@ -120,22 +101,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  drawerButton: {
-    position: 'absolute',
-    top: 20,
-    right: 30,
-  },
-  arrowButton: {
-    position: 'absolute',
-    top: 20,
-    left: 30,
-    tintColor:'#FF3B96',
-  },
-  menuIcon: {
-    width: 20,
-    height: 20,
-    tintColor:'#FF3B96',
-  },
   container: {
     flex: 1,
     padding: width * 0.05, // Responsive padding
@@ -143,7 +108,7 @@ const styles = StyleSheet.create({
   profileBackground: {
     borderRadius: 15,
     padding: width * 0.05, // Responsive padding
-    marginTop: 30,
+    marginTop: 50,
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { icons, images } from "../../constants"; // Importing bg image from constants
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { icons, images } from '../../constants'; // Importing bg image from constants
 import { Picker } from '@react-native-picker/picker'; // For the dropdown
-import { Image } from "react-native";
+import { Image } from 'react-native';
 
-const SpinScreen = () => {
-  const [coins, setCoins] = useState("");
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("Google Pay");
+const MoneyRecharge = () => {
+  const [coins, setCoins] = useState('');
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('Google Pay');
 
-  const coinToRupees = coins ? (parseFloat(coins) * 1.5).toFixed(2) : "0.00";
+  const coinToRupees = coins ? (parseFloat(coins) * 1.5).toFixed(2) : '0.00';
 
   return (
     <ImageBackground source={images.bg} style={styles.backgroundImage}>
@@ -57,119 +57,119 @@ const SpinScreen = () => {
   );
 };
 
-export default SpinScreen;
+export default MoneyRecharge;
 
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover", 
+    resizeMode: 'cover',
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 20,
   },
   heading: {
-    fontFamily: "Poppins-SemiBold",
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 28,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 10,
   },
   subHeading: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
     fontSize: 18,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 5,
   },
   appName: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 24,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 30,
   },
   inputContainer: {
-    width: "100%",
+    width: '100%',
     marginBottom: 20,
   },
   label: {
-    fontFamily: "Poppins-SemiBold",
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 20,
-    color: "#000",
+    color: '#000',
     marginBottom: 5,
   },
   coinIcon: {
-    width:20, 
+    width:20,
     height: 20,
   },
   input: {
     height: 50,
-    borderColor: "#FF3B96",
+    borderColor: '#FF3B96',
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 15,
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
     fontSize: 18,
-    color: "#000",
-    backgroundColor: "rgba(255, 255, 255, 0.5)", // Transparent background
+    color: '#000',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // Transparent background
   },
   rupeesText: {
-    fontFamily: "Poppins-Bold", // Increased emphasis
+    fontFamily: 'Poppins-Bold', // Increased emphasis
     fontSize: 24, // Slightly larger
-    color: "#fff",
+    color: '#fff',
     marginTop: 10,
   },
   dropdownContainer: {
-    width: "100%",
+    width: '100%',
     marginBottom: 30,
     borderRadius:20,
   },
   picker: {
     height: 50,
-    borderColor: "#FF3B96",
+    borderColor: '#FF3B96',
     borderWidth: 1,
     borderRadius: 20,
-    backgroundColor: "#fff",
-    color: "#000",
-    fontFamily: "Poppins-Regular",
+    backgroundColor: '#fff',
+    color: '#000',
+    fontFamily: 'Poppins-Regular',
   },
   paymentInfoContainer: {
-    width: "100%",
-    alignItems: "center",
+    width: '100%',
+    alignItems: 'center',
     position:'fixed',
     bottom:-60,
   },
   paymentInfoText: {
-    fontFamily: "Poppins-Regular",
+    fontFamily: 'Poppins-Regular',
     fontSize: 16,
-    color: "#fff",
+    color: '#fff',
     marginBottom: 20,
   },
   payButton: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    backgroundColor: "#FF3B96",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#FF3B96',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
     marginBottom: 20,
   },
   payButtonText: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 18,
-    color: "#fff",
+    color: '#fff',
   },
   morePackagesButton: {
-    width: "70%",
+    width: '70%',
     height: 40,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
   },
   morePackagesText: {
-    fontFamily: "Poppins-Bold",
+    fontFamily: 'Poppins-Bold',
     fontSize: 18,
-    color: "#FF3B96",
+    color: '#FF3B96',
   },
 });
